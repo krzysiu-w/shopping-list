@@ -1,19 +1,12 @@
  import _ from 'lodash';
  import '../scss/style.scss';
- import 'jquery';
+ import 'bootstrap';
+ import "@fortawesome/fontawesome-free/js/all.js";
+ import PageHandler from './components/PageHandler';
 
- function page() {
-    //  const element = document.createElement('div');
-    //  const btn = document.createElement('button');
+$(function() {
+    let handlePage = new PageHandler();
+    handlePage.init();
+})
 
-    //  // Lodash, currently included via a script, is required for this line to work
-    //  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-    //  element.classList.add('hello');
 
-    //  btn.innerHTML = 'Click me and check the console!';
-
-    //  element.appendChild(btn);
-    //  return element;
- }
-
- document.body.appendChild(page());

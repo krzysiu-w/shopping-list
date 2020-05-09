@@ -14,17 +14,27 @@ module.exports = {
     },
     module: {
         rules: [{
-            test: /\.s[ac]ss$/i,
-            use: [
-                // Creates `style` nodes from JS strings
-                'style-loader',
-                // Translates CSS into CommonJS
-                'css-loader',
-                // Compiles Sass to CSS
-                'sass-loader',
-                'postcss-loader'
-            ],
-        }, ],
+            test: /\.(scss)$/,
+            use: [{
+                loader: 'style-loader', 
+            }, {
+                loader: 'css-loader', 
+            }, {
+                loader: 'postcss-loader',
+                options: {
+                    plugins: function () { 
+                        return [
+                            require('autoprefixer')
+                        ];
+                    }
+                }
+            }, {
+                loader: 'sass-loader' // compiles Sass to CSS
+            }]
+        },{
+            test: /\.(svg|eot|woff|woff2|ttf)$/,
+            use: ['file-loader']
+        } ],
     },
     plugins: [
         new webpack.ProvidePlugin({
