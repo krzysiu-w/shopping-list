@@ -1,0 +1,34 @@
+@import 'variables';
+@import 'mixins';
+
+.radios {
+    margin-top: 2.3rem;
+}
+
+.red-scheme {
+    @include dark-red-scheme;
+}
+
+.close {
+    color: $white !important;
+}
+
+.dark-red-text {
+    color: $dark-red;
+
+    a {
+        color: $dark-red;
+    }
+
+    a:hover {
+        color: $gray-darker !important; 
+    }
+}
+
+.error {
+    color: $dark-red !important;
+}
+
+.border-red {
+    border: 1px solid $dark-red !important;
+}
