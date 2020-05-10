@@ -191,7 +191,6 @@ export default class PageHandler {
     }
 
     handleEditSubmit(e) {
-        console.log(e);
         e.preventDefault();
         const { event, thisObj } = e.data;
         const prevListItem = $(event.target).parents('li')[0]; 
@@ -199,7 +198,6 @@ export default class PageHandler {
         const oldAmount = $(event.target).parents('li').find('span#itemAmount').text();
         const oldUnit = $(event.target).parents('li').find('span#itemUnit').text();
         const position = $(event.target).parents('li').index();
-        console.log(position);
 
         if ($('#edit-product-form').valid()) {
             const newName = $('#editName').val();
