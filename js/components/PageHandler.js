@@ -1,14 +1,19 @@
 import 'jquery-validation';
+import { generateListItem } from './listElementGenerator';
+import { storageUpdate } from './storageUpdate';
+import { storageRead } from './storageRead';
+import { updatePage } from './updatePage';
 
 export default class PageHandler {
     constructor() {
         // initial values
-        this.totalItems = 0;
-        this.pieces = 0;
-        this.grams = 0;
-        $('#total').text(this.totalItems);
-        $('#pieces-value').text(this.pieces);
-        $('#grams-value').text(this.grams);
+
+        this.pageState = storageRead();
+        updatePage(this.pageState);
+
+        $('#total').text(this.pageState.totalItems);
+        $('#pieces-value').text(this.pageState.pieces);
+        $('#grams-value').text(this.pageState.grams);
 
         // bindings
         this.init = this.init.bind(this);
@@ -64,21 +69,43 @@ export default class PageHandler {
             // then update total weight / amount
             switch (unit) {
                 case 'pcs':
-                    this.pieces += parseInt(amount);
-                    $('#pieces-value').text(this.pieces);
+                    this.pageState.pieces += parseInt(amount);
+                    $('#pieces-value').text(this.pageState.pieces);
                     break;
                 case 'g':
-                    this.grams += parseInt(amount);
-                    $('#grams-value').text(this.grams);
+                    this.pageState.grams += parseInt(amount);
+                    $('#grams-value').text(this.pageState.grams);
                     break;
             }
 
             // update total items in list
-            this.totalItems += 1;
-            $('#total').text(this.totalItems);
+            this.pageState.totalItems += 1;
+            $('#total').text(this.pageState.totalItems);
 
-            // generate and append li item using variables you got from form
-            $('#' + category + ' > .list-group').append('<li class="list-group-item">' + name + '<span class="badge red-scheme ml-1"><span id="itemAmount">' + amount + '</span><span class="ml-1" id="itemUnit">' + unit + '</span></span><div class="my-1 dark-red-text"><i class="fas fa-edit"></i><i class="ml-2 fas fa-ban mx-2 remove"></i><i class="fas fa-file-export"></i></div></li>');
+            //generate li element
+            let generatedLi = generateListItem(name, amount, unit);
+
+            // append li item using variables you got from form
+            $('#' + category + ' > .list-group').append(generatedLi);
+
+            switch(category) {
+                case 'vegetables':
+                    this.pageState.vegetables.push(generatedLi);
+                    break;
+                case 'fruits':
+                    this.pageState.fruits.push(generatedLi);
+                    break;
+                case 'dairy':
+                    this.pageState.dairy.push(generatedLi);
+                    break;
+                case 'bread':
+                    this.pageState.bread.push(generatedLi);
+                    break;
+                case 'hygiene':
+                    this.pageState.hygiene.push(generatedLi);
+                    break;
+            }
+            storageUpdate(this.pageState);
             $('#add-product-form').trigger('reset');
         }
     }
@@ -87,25 +114,47 @@ export default class PageHandler {
         // find badge with amount and unit info
         const itemAmount = $(e.target).parents('li').find('span#itemAmount').text();
         const itemUnit = $(e.target).parents('li').find('span#itemUnit').text();
+        const itemCategory = $(e.target).parents('div.tab-pane').attr('id');
+        const position = $(e.target).parents('li').index();
+
+        switch(itemCategory) {
+            case 'vegetables':
+                this.pageState.vegetables.splice(position, 1);
+                break;
+            case 'fruits':
+                this.pageState.fruits.splice(position, 1);
+                break;
+            case 'dairy':
+                this.pageState.dairy.splice(position, 1);
+                break;
+            case 'bread':
+                this.pageState.bread.splice(position, 1);
+                break;
+            case 'hygiene':
+                this.pageState.hygiene.splice(position, 1);
+                break;
+        }
 
         // check whether product has gram or piece unit
         // then update total weight / amount
         switch (itemUnit) {
             case 'pcs':
-                this.pieces -= parseInt(itemAmount);
-                $('#pieces-value').text(this.pieces);
+                this.pageState.pieces -= parseInt(itemAmount);
+                $('#pieces-value').text(this.pageState.pieces);
                 break;
             case 'g':
-                this.grams -= parseInt(itemAmount);
-                $('#grams-value').text(this.grams);
+                this.pageState.grams -= parseInt(itemAmount);
+                $('#grams-value').text(this.pageState.grams);
                 break;
         }
 
         // update total items in list
-        this.totalItems -= 1;
-        $('#total').text(this.totalItems);
+        this.pageState.totalItems -= 1;
+        $('#total').text(this.pageState.totalItems);
 
         // find and delete whole li element
         $(e.target).parents('li').remove();
+
+        storageUpdate(this.pageState);
     }
 }
