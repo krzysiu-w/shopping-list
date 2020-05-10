@@ -4,9 +4,8 @@
   "description": "Interview project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "start": "webpack-dev-server --open & webpack --watch"
+    "start": "webpack-dev-server --open && webpack --watch"
   },
   "author": "",
   "license": "ISC",

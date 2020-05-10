@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
     <title>Shopping List App</title>
 </head>
 
@@ -94,8 +95,8 @@
                                 <!-- Title -->
                                 <h6 class="card-title">Total products weight: </h6>
                                 <!-- Text -->
-                                <p class="card-text dark-red-text"><i class="fas fa-weight-hanging fa-2x"></i><span class="ml-2 fa-2x"
-                                        id="grams-value"></span> g</p>
+                                <p class="card-text dark-red-text"><i class="fas fa-weight-hanging fa-2x"></i><span
+                                        class="ml-2 fa-2x" id="grams-value"></span> g</p>
                             </div>
                             <!-- Card content -->
                         </div>
@@ -108,7 +109,8 @@
                                 <!-- Title -->
                                 <h6 class="card-title">Currently: </h6>
                                 <!-- Text -->
-                                <p class="card-text dark-red-text"><span class="ml-2 fa-2x" id="total"></span> products</p>
+                                <p class="card-text dark-red-text"><span class="ml-2 fa-2x" id="total"></span> products
+                                </p>
                             </div>
                             <!-- Card content -->
                         </div>
@@ -141,7 +143,8 @@
                                     <input class="form-check-input" type="radio" name="unit" id="grams" value="g">
                                     <label class="form-check-label" for="grams" id="xd">g</label>
                                 </div>
-                                <label id="unit-error" class="error ml-3" for="unit" style="display: none;">Choose unit</label>
+                                <label id="unit-error" class="error ml-3" for="unit" style="display: none;">Choose
+                                    unit</label>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="category">Category</label>
@@ -158,6 +161,52 @@
                             <button type="submit" class="btn red-scheme dark-red-text">Add</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header red-scheme">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Edit product</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="edit-product-form">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="editName">New name</label>
+                                    <input type="text" class="form-control" id="editName" name="editName"
+                                        placeholder="New name">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="editAmount">New amount</label>
+                                    <input type="number" class="form-control" id="editAmount" name="editAmount"
+                                        placeholder="New amount">
+                                </div>
+                                <div class="form-group col-md-3 radios ml-3">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="newUnit" id="pieces-2" value="pcs">
+                                        <label class="form-check-label" for="pieces-2">pcs</label>
+                                    </div>
+                                    <div class="form-check form-check-inline last">
+                                        <input class="form-check-input" type="radio" name="newUnit" id="grams-2" value="g">
+                                        <label class="form-check-label" for="grams-2">g</label>
+                                    </div>
+                                    <label id="newUnit-error" class="error ml-3" for="newUnit" style="display: none;">Choose
+                                        unit</label>
+                                </div>
+                            </div>
+                            <div class="form-row justify-content-center">
+                                <button type="submit" class="btn red-scheme dark-red-text">Add</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

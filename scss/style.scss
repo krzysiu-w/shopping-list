@@ -10,6 +10,10 @@
     @include dark-red-scheme;
 }
 
+.close {
+    color: $white !important;
+}
+
 .dark-red-text {
     color: $dark-red;
 
