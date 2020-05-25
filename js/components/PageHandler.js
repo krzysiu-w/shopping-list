@@ -193,8 +193,6 @@ export default class PageHandler {
         const currentAmount = $(e.target).parents('li').find('span#itemAmount').text();
         const currentUnit = $(e.target).parents('li').find('span#itemUnit').text();
 
-        console.log(currentName, currentAmount, currentUnit);
-
         $('#editName').val(currentName);
         $('#editAmount').val(currentAmount);
 
