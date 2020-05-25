@@ -186,7 +186,26 @@ export default class PageHandler {
     }
 
     editItem(e) {
+        e.preventDefault();
         $('#exampleModalCenter').modal('show');
+
+        const currentName = $(e.target).parents('li').find('span#itemName').text();
+        const currentAmount = $(e.target).parents('li').find('span#itemAmount').text();
+        const currentUnit = $(e.target).parents('li').find('span#itemUnit').text();
+
+        console.log(currentName, currentAmount, currentUnit);
+
+        $('#editName').val(currentName);
+        $('#editAmount').val(currentAmount);
+
+        switch(currentUnit) {
+            case 'pcs':
+                $('#pieces-2').prop('checked', true);
+                break;
+            case 'g':
+                $('#grams-2').prop('checked', true);
+        }
+
         $('#edit-product-form').submit({event: e, thisObj: this}, this.handleEditSubmit);
     }
 
